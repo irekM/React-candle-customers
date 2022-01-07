@@ -1,35 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import Button from 'components/atoms/Button/Button';
+import { StyledOcena, StyledInfo, Wrapper } from '../UserListItem.styles';
 
-const Wrapper = styled.div`
-    display: flex;
-    align-items: center;
-    position: relative;
-    &:not(:last-child)::after{
-        content: '';
-        position: absolute;
-        botton: 0;
-        width: 100%;
-        height: 1px;
-        background-color: lightgrey;
-    }
-`;
-
-
-
-const UserListItem = ({userData: {zamówienia, imie, ocena = '0'}}) => (
+const UserListItem = ({userData: {ocena, imie, zamówienia  = '0'}}) => (
     <Wrapper>
-    <div>{zamówienia}</div>
-    <div>
-        <p>{imie}</p>
-        <p>{ocena}</p>
-    </div>
+   <StyledOcena value={ocena}>{ocena}</StyledOcena>
+   <StyledInfo>
+        <p>
+            {imie}
+            <Button/>
+        </p>
+        <p>zamówienia: {zamówienia}</p> 
    
-   
-
-
+    </StyledInfo>
     </Wrapper>
     );
 
