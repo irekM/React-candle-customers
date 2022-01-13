@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import Button from 'components/atoms/Button/Button';
 import { StyledOcena, StyledInfo, Wrapper } from '../UserListItem.styles';
 
-const UserListItem = ({userData: {ocena, imie, zamówienia  = '0'}}) => (
+const UserListItem = ({deleteUser, userData: {ocena, imie, zamówienia  = '0'}}) => (
     <Wrapper>
    <StyledOcena value={ocena}>{ocena}</StyledOcena>
    <StyledInfo>
         <p>
             {imie}
-            <Button/>
+            <Button onClick={() => deleteUser(imie)}/>
         </p>
         <p>zamówienia: {zamówienia}</p> 
    
