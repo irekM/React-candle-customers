@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'components/atoms/Button/Button';
+import DeleteButton from 'components/atoms/DeleteButton/DeleteButton';
 import { StyledOcena, StyledInfo, Wrapper } from '../UserListItem.styles';
 
-const UserListItem = ({deleteUser, userData: {ocena, imie, zamówienia  = '0'}}) => (
+const UserListItem = ({deleteUser, userData: {avarge, imie, zamówienia = '0'}}) => (
     <Wrapper>
    <StyledOcena value={ocena}>{ocena}</StyledOcena>
    <StyledInfo>
         <p>
             {imie}
-            <Button onClick={() => deleteUser(imie)}/>
+            <DeleteButton onClick={() => deleteUser(imie)}/>
         </p>
         <p>zamówienia: {zamówienia}</p> 
    
@@ -25,5 +25,5 @@ UserListItem.propTypes = {
     })
 }
 
-export default UserListItem
+export default UserListItem;
 

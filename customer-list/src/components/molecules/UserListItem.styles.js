@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
 display: flex;
 align-items: center;
 position: relative;
+
 &:not(:last-child)::after{
     content: '';
     position: absolute;
@@ -28,6 +29,7 @@ export const StyledOcena = styled.div`
         if (value > 4) return theme.colors.success;
         if (value > 3) return theme.colors.warning;
         if (value > 2) return theme.colors.error;
+        return theme.colors.grey;
     }};
 `;
 
