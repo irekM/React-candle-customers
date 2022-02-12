@@ -15,22 +15,21 @@ const initialFormState = {
   average: '',
 };
 
+export const UsersContext = React.createContext({
+  users: [],
+  handleAddUser: ()=>{},
+  deleteUser: () => {},
+});
+
 const Root = () => {
   const [users, setUsers] = useState(usersData);
-  const [formValues, setFormValues] = useState(initialFormState);
 
   const deleteUser = (name) => {
     const filteredUsers = users.filter((user) => user.name !== name);
     setUsers(filteredUsers);
   };
 
-  const handleInputChange = (e) => {
-    console.log(formValues);
-    setFormValues({
-      ...formValues,
-      [e.target.name]: e.target.value,
-    });
-  };
+  
 
   const handleAddUser = (e) => {
     e.preventDefault();
@@ -49,16 +48,22 @@ const Root = () => {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <MainTemplate>
+          <UsersContext.Provider value={{
+            users,
+            handleAddUser,
+            deleteUser,
+          }}>
         <Wrapper>
           <Switch>
             <Route path="/add-user">
-              <Form formValues={formValues} handleAddUser={handleAddUser} handleInputChange={handleInputChange} />
+              <Form formValues={formValues} handleInputChange={handleInputChange} />
             </Route>
             <Route path="/">
               <UsersList deleteUser={deleteUser} users={users} />
             </Route>
           </Switch>
         </Wrapper>
+        </UsersContext.Provider>
         </MainTemplate>
       </ThemeProvider>
     </Router>
