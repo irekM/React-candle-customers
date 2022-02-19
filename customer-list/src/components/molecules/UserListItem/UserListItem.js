@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import DeleteButton from 'components/atoms/DeleteButton/DeleteButton';
 import { StyledAvarge, StyledInfo, Wrapper } from '../UserListItem.styles';
 import { UserShape } from 'types';
-import { UsersContext } from 'vievs/Root';
+import { UsersContext } from 'providers/UsersProvider';
 
 
 const UserListItem = ({userData: {avarge, name, attendence = '0'}}) => {
