@@ -31,16 +31,13 @@ const Root = () => {
 
   
 
-  const handleAddUser = (e) => {
-    e.preventDefault();
+  const handleAddUser = (values) => {
     const newUser = {
-      name: formValues.name,
-      attendance: formValues.attendance,
-      average: formValues.average,
+      name: values.name,
+      attendance: values.attendance,
+      average: values.average,
     };
-
     setUsers([newUser, ...users]);
-    setFormValues(initialFormState);
   };
 
   return (
@@ -56,10 +53,10 @@ const Root = () => {
         <Wrapper>
           <Switch>
             <Route path="/add-user">
-              <Form formValues={formValues} handleInputChange={handleInputChange} />
+             <AddUser/>
             </Route>
             <Route path="/">
-              <UsersList deleteUser={deleteUser} users={users} />
+              <Dashboard />
             </Route>
           </Switch>
         </Wrapper>

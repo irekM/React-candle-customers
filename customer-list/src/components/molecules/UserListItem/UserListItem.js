@@ -1,29 +1,35 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import DeleteButton from 'components/atoms/DeleteButton/DeleteButton';
-import { StyledOcena, StyledInfo, Wrapper } from '../UserListItem.styles';
+import { StyledAvarge, StyledInfo, Wrapper } from '../UserListItem.styles';
+import { UserShape } from 'types';
+import { UsersContext } from 'vievs/Root';
 
-const UserListItem = ({deleteUser, userData: {avarge, imie, zamówienia = '0'}}) => (
+
+const UserListItem = ({userData: {avarge, name, attendence = '0'}}) => {
+    const { deleteUser } = useContext(UsersContext);
+
+   return (
     <Wrapper>
-   <StyledOcena value={ocena}>{ocena}</StyledOcena>
-   <StyledInfo>
-        <p>
-            {imie}
-            <DeleteButton onClick={() => deleteUser(imie)}/>
-        </p>
-        <p>zamówienia: {zamówienia}</p> 
+    <StyledAvarge value={avarge}>{avarge}</StyledAvarge>
+    <StyledInfo>
+         <p>
+             {name}
+             <DeleteButton onClick={() => deleteUser(name)}/>
+         </p>
+         <p>attendence: {attendence}</p> 
+    
+     </StyledInfo>
+     </Wrapper>
+   )
+    
+};
+    
    
-    </StyledInfo>
-    </Wrapper>
-    );
 
 UserListItem.propTypes = {
-    userData: PropTypes.shape({
-        zamówienia: PropTypes.string.isRequired,
-        imie: PropTypes.string.isRequired,
-        ocena: PropTypes.string,
-    })
-}
+    userData: PropTypes.shape(UserShape),
+};
 
 export default UserListItem;
 
