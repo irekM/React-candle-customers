@@ -6,13 +6,12 @@ const Navigation = () => {
     <Wrapper>
       <Logo>
         <h1>
-          Study
+          Siema
           <br />
-          Buddy
+          Stary
         </h1>
       </Logo>
-      <StyledLink exact to="/">Dashboard</StyledLink>
-      <StyledLink to="/add-user">Add user</StyledLink>
+      <StyledLink exact to="/group">Dashboard</StyledLink>
     </Wrapper>
   );
 };
