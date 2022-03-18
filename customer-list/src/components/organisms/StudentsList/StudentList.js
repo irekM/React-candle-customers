@@ -1,26 +1,32 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import DeleteButton from 'components/atoms/DeleteButton/DeleteButton';
-import { StyledAverage, StyledInfo, Wrapper } from './StudentsListItem.styles';
-import { UserShape } from 'types';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import StudentsListItem from 'components/molecules/StudentsListItem/StudentsListItem';
+import { StyledList } from './StudentsList.styles';
+import { Title } from 'components/atoms/Title/Title';
+import { useStudents } from 'hooks/useStudents';
 
-const StudentsListItem = ({ userData: { average, name, attendance = '0%' } }) => {
+const StudentsList = () => {
+  const [students, setStudents] = useState([]);
+  const { id } = useParams();
+  const { getStudents } = useStudents();
+
+  useEffect(() => {
+    (async () => {
+      const students = await getStudents(id);
+      setStudents(students);
+    })();
+  }, [getStudents, id]);
+
   return (
-    <Wrapper>
-      <StyledAverage value={average}>{average}</StyledAverage>
-      <StyledInfo>
-        <p>
-          {name}
-          <DeleteButton />
-        </p>
-        <p>attendance: {attendance}</p>
-      </StyledInfo>
-    </Wrapper>
+    <>
+      <Title>Students list</Title>
+      <StyledList>
+        {students.map((userData) => (
+          <StudentsListItem key={userData.name} userData={userData} />
+        ))}
+      </StyledList>
+    </>
   );
 };
 
-StudentsListItem.propTypes = {
-  userData: PropTypes.shape(UserShape),
-};
-
-export default StudentsListItem;
+export default StudentsList;
